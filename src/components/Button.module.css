@@ -1,0 +1,29 @@
+.button {
+  display: inline-block;
+  height: auto;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  overflow: hidden;
+  color: white;
+}
+.addButton,
+.cancelBtn,
+.addBut {
+  background-color: #646ff0;
+  width: max-content;
+  height: 45px;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+.cancelBtn {
+  margin-left: 15px;
+  background-color: #cacbd3;
+}
+.addBut {
+  margin-left: 20px;
+}
