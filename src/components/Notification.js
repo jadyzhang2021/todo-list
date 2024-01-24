@@ -20,10 +20,12 @@ const Notification = ({
 
   return (
     <div>
-      <div className={`${classes.text} ${classes[className]}`}>
-        <div style={{ marginRight: "8px" }}> {icon}</div>
-        <div style={{ textAlign: "centre" }}>{text}</div>
-      </div>
+      <li>
+        <div className={`${classes.text} ${classes[className]}`}>
+          <div style={{ marginRight: "8px" }}> {icon}</div>
+          <div style={{ textAlign: "centre" }}>{text}</div>
+        </div>
+      </li>
     </div>
   );
 };

@@ -16,8 +16,8 @@ const AddTodo = ({ isEdit, closeTodoList, itemId }) => {
   const updatedItemIndex = Cartax.items.findIndex((item) => item.id === itemId);
   const item = Cartax.items[updatedItemIndex];
 
-  function onSubmitHandler(event) {
-    event.preventDefault();
+  function onSubmitHandler() {
+    // event.preventDefault();
     const selectValue = selectRef.current.value;
     const inputValue = inputRef.current.value;
 
@@ -51,6 +51,11 @@ const AddTodo = ({ isEdit, closeTodoList, itemId }) => {
     }
   }
 
+  const onKeyDownHandler = (e) => {
+    if (e.key === "Enter") {
+      onSubmitHandler();
+    }
+  };
   return (
     <div>
       <div className={classes.addBox}>
@@ -65,6 +70,7 @@ const AddTodo = ({ isEdit, closeTodoList, itemId }) => {
             type="text"
             ref={inputRef}
             defaultValue={isEdit ? item.inputValue : ""}
+            onKeyDown={onKeyDownHandler}
           />
           <label htmlFor="status">Status</label>
           <select

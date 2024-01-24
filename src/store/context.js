@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 export const CartContext = createContext({
   items: [],
@@ -15,10 +15,16 @@ export const CartContext = createContext({
 });
 
 const todoItemsReducer = (state, action) => {
+  if (action.type === "GET_ITEM") {
+    const items = action.items;
+    return { ...state, items: items };
+  }
+
   if (action.type === "ADD_ITEM") {
     const items = [...state.items];
     const actionItems = [...action.items];
     const updatedItems = items.concat(actionItems);
+    localStorage.setItem("Items", JSON.stringify(updatedItems));
     return { ...state, items: updatedItems, filteredItems: updatedItems };
   }
 
@@ -29,6 +35,7 @@ const todoItemsReducer = (state, action) => {
     );
 
     updatedItems.splice(updatedItemIndex, 1);
+    localStorage.setItem("Items", JSON.stringify(updatedItems));
     return { ...state, items: updatedItems, filteredItems: updatedItems };
   }
 
@@ -39,10 +46,10 @@ const todoItemsReducer = (state, action) => {
       (item) => item.id === action.item.id
     );
     const item = updatedItems[updatedItemIndex];
-    console.log({ item });
 
     item.inputValue = action.item.inputValue;
     item.selectValue = action.item.selectValue;
+    localStorage.setItem("Items", JSON.stringify(updatedItems));
     return { ...state, items: updatedItems, filteredItems: updatedItems };
   }
 
@@ -99,6 +106,20 @@ const CartContextProvider = ({ children }) => {
       status,
     });
   }
+
+  function getItemsHandler(items) {
+    todoItemsDispatch({
+      type: "GET_ITEM",
+      items,
+    });
+  }
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem("Items");
+    if (storedItems) {
+      getItemsHandler(JSON.parse(storedItems));
+    }
+  }, []);
 
   const ctxValue = {
     items: todoItems.items,
