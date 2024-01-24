@@ -4,6 +4,7 @@ import EditMark from "../icon/EditMark";
 import Mark from "../icon/Mark";
 import { useContext } from "react";
 import { CartContext } from "../store/context";
+import { format } from "date-fns";
 
 const ContentList = ({ onDeleteClick, onEditClick, item }) => {
   const { inputValue: title, selectValue, id } = item;
@@ -21,6 +22,10 @@ const ContentList = ({ onDeleteClick, onEditClick, item }) => {
       Cartax.editItem({ ...item, selectValue: "completed" });
     }
   };
+
+  const currentTime = new Date();
+  const formatteTiem = format(currentTime, "h:mm a, MM/dd/yyyy");
+
   return (
     <div>
       <li className={classes.box}>
@@ -39,7 +44,7 @@ const ContentList = ({ onDeleteClick, onEditClick, item }) => {
             >
               {title}
             </p>
-            <p>2023.12.12 </p>
+            <p>{formatteTiem}</p>
           </div>
         </div>
         <div className={classes.svgBox}>
