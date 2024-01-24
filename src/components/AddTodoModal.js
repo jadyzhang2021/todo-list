@@ -17,7 +17,6 @@ const AddTodo = ({ isEdit, closeTodoList, itemId }) => {
   const item = Cartax.items[updatedItemIndex];
 
   function onSubmitHandler() {
-    // event.preventDefault();
     const selectValue = selectRef.current.value;
     const inputValue = inputRef.current.value;
 
